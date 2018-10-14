@@ -1,6 +1,14 @@
 import React from "react";
 
+import PropTypes from "prop-types";
+
 import "./inputText.css";
+
+const propTypes = {
+  userNameToReply: PropTypes.string,
+  onSendText: PropTypes.func.isRequired,
+  onOpenText: PropTypes.func.isRequired
+};
 
 const InputText = props => {
   const { onSendText, onOpenText, userNameToReply } = props;
@@ -22,5 +30,7 @@ const InputText = props => {
     </form>
   );
 };
+
+InputText.propTypes = propTypes;
 
 export default InputText;

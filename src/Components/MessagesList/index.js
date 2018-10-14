@@ -1,8 +1,17 @@
 import React from "react";
 
+import PropTypes from "prop-types";
+
 import Message from "../Message";
 
 import "./messagesList.css";
+
+const propTypes = {
+  messages: PropTypes.array.isRequired,
+  onRetweet: PropTypes.func,
+  onFavorite: PropTypes.func,
+  onReplyTweet: PropTypes.func
+};
 
 const MessagesList = props => {
   const { messages, onRetweet, onFavorite, onReplyTweet } = props;
@@ -26,5 +35,7 @@ const MessagesList = props => {
 
   return <div className="rootLista">{messagesData()}</div>;
 };
+
+MessagesList.propTypes = propTypes;
 
 export default MessagesList;

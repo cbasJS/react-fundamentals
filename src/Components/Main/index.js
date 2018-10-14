@@ -1,10 +1,16 @@
 import React, { Component } from "react";
 
+import PropTypes from "prop-types";
+
 import uuid from "uuid";
 
 import MessagesList from "../MessagesList";
 import InputText from "../InputText";
 import ProfileBar from "../ProfileBar";
+
+const propTypes = {
+  user: PropTypes.object.isRequired
+};
 
 class Main extends Component {
   constructor(props) {
@@ -145,5 +151,7 @@ class Main extends Component {
     );
   }
 }
+
+Main.propTypes = propTypes;
 
 export default Main;

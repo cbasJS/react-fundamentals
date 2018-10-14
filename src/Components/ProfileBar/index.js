@@ -1,6 +1,14 @@
 import React from "react";
 
+import PropTypes from "prop-types";
+
 import "./profileBar.css";
+
+const propTypes = {
+  picture: PropTypes.string,
+  username: PropTypes.string,
+  onOpenText: PropTypes.func
+};
 
 const ProfileBar = props => {
   const { picture, username, onOpenText } = props;
@@ -16,5 +24,7 @@ const ProfileBar = props => {
     </div>
   );
 };
+
+ProfileBar.propTypes = propTypes;
 
 export default ProfileBar;

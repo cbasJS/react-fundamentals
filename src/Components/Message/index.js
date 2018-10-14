@@ -1,8 +1,23 @@
 import React from "react";
 
+import PropTypes from "prop-types";
+
 import moment from "moment";
 
 import "./message.css";
+
+const propTypes = {
+  date: PropTypes.number,
+  numFavorites: PropTypes.number,
+  numRetweets: PropTypes.number,
+  txt: PropTypes.string,
+  picture: PropTypes.string,
+  displayName: PropTypes.string,
+  userName: PropTypes.string,
+  onReplyTweet: PropTypes.func,
+  onRetweet: PropTypes.func,
+  onFavorite: PropTypes.func
+};
 
 const Message = props => {
   const {
@@ -50,5 +65,7 @@ const Message = props => {
     </div>
   );
 };
+
+Message.propTypes = propTypes;
 
 export default Message;
