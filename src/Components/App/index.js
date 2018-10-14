@@ -7,12 +7,22 @@ import Main from "../Main";
 import Footer from "../Footer";
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      user: {
+        photoUrl: "https://avatars3.githubusercontent.com/u/28812706?s=40&v=4",
+        email: "sebastian.martha@sngular.team",
+        displayName: "Sebastian Martha"
+      }
+    };
+  }
   render() {
     return (
       <div>
         <CssBaseline />
         <Header />
-        <Main />
+        <Main user={this.state.user} />
         <Footer />
       </div>
     );

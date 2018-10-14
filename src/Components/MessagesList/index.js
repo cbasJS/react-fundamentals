@@ -5,17 +5,22 @@ import Message from "../Message";
 import "./messagesList.css";
 
 const MessagesList = props => {
-  const { messages } = props;
+  const { messages, onRetweet, onFavorite, onReplyTweet } = props;
 
   const messagesData = () =>
-    messages.map((result, index) => (
+    messages.map(result => (
       <Message
-        key={index}
+        key={result.id}
         txt={result.text}
         picture={result.picture}
         displayName={result.displayName}
         userName={result.userName}
         date={result.date}
+        numRetweets={result.retweets}
+        numFavorites={result.favorites}
+        onRetweet={() => onRetweet(result.id, "retweets")}
+        onFavorite={() => onFavorite(result.id, "favorites")}
+        onReplyTweet={() => onReplyTweet(result.id, result.userName)}
       />
     ));
 
