@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Link } from "react-router-dom";
+
 import PropTypes from "prop-types";
 
 import moment from "moment";
@@ -35,12 +37,16 @@ const Message = props => {
 
   let dateFormat = moment(date).fromNow();
 
+  let userLink = `/user/${userName}`;
+
   return (
     <div className="rootMessage">
       <div className="user">
-        <figure>
-          <img className="avatar" src={picture} alt="Avatar" />
-        </figure>
+        <Link to={userLink}>
+          <figure>
+            <img className="avatar" src={picture} alt="Avatar" />
+          </figure>
+        </Link>
         <span className="displayName">{displayName}</span>
         <span className="userName">{userName}</span>
         <span className="date">{dateFormat}</span>
