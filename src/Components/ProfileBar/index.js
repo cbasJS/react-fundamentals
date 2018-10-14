@@ -9,11 +9,12 @@ import "./profileBar.css";
 const propTypes = {
   picture: PropTypes.string,
   username: PropTypes.string,
-  onOpenText: PropTypes.func
+  onOpenText: PropTypes.func,
+  onLogount: PropTypes.func.isRequired
 };
 
 const ProfileBar = props => {
-  const { picture, username, onOpenText } = props;
+  const { picture, username, onOpenText, onLogount } = props;
   let profileLink = "/profile";
   return (
     <div className="rootProfile">
@@ -25,6 +26,9 @@ const ProfileBar = props => {
       <span className="usernameProfile">Hola @{username}</span>
       <button onClick={onOpenText} className="buttonProfile">
         <span className="fa fa-lg fa-edit" /> Tweet!
+      </button>
+      <button className="buttonProfile" onClick={onLogount}>
+        <li className="fa fa-sign-out" /> Salir
       </button>
     </div>
   );

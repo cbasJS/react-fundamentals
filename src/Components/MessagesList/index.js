@@ -14,7 +14,7 @@ const propTypes = {
 };
 
 const MessagesList = props => {
-  const { messages, onRetweet, onFavorite, onReplyTweet } = props;
+  const { messages, onAction, onReplyTweet } = props;
 
   const messagesData = () =>
     messages.map(result => (
@@ -27,8 +27,8 @@ const MessagesList = props => {
         date={result.date}
         numRetweets={result.retweets}
         numFavorites={result.favorites}
-        onRetweet={() => onRetweet(result.id, "retweets")}
-        onFavorite={() => onFavorite(result.id, "favorites")}
+        onRetweet={() => onAction(result.idFirebase, "retweets")}
+        onFavorite={() => onAction(result.idFirebase, "favorites")}
         onReplyTweet={() => onReplyTweet(result.id, result.userName)}
       />
     ));

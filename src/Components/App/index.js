@@ -9,26 +9,40 @@ import Main from "../Main";
 import Profile from "../Profile";
 import Login from "../Login";
 
-/** HashRouter = Switch
- *  Match = Route
- *  pattern = path
- */
+import firebase from "firebase";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      user: {
-        photoUrl: "https://avatars3.githubusercontent.com/u/28812706?s=40&v=4",
-        email: "sebastian.martha@sngular.team",
-        displayName: "Sebastian Martha",
-        location: "CDMX, México"
-      }
+      user: null
     };
   }
 
+  //Sirve para aplicaciones isomorficas
+  //se ejecuta una vez que renderiza el DOM
+  UNSAFE_componentWillMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      user ? this.setState({ user }) : this.setState({ user: null });
+    });
+  }
+
   handleOnAuth = () => {
-    console.log("handleOnAuth");
+    const provider = new firebase.auth.GithubAuthProvider();
+
+    firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then(result => console.log(`${result.user.email} ha iniciado sesion`))
+      .catch(error => console.error(`Error: ${error.code}: ${error.message}`));
+  };
+
+  handleLogout = () => {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => console.log("deslogueado correctamente"))
+      .catch(() => console.error("ocurrio un error"));
   };
 
   render() {
@@ -43,10 +57,10 @@ class App extends Component {
               exact
               path="/"
               render={() =>
-                user ? (
-                  <Main user={user} />
-                ) : (
+                !user ? (
                   <Login onAuth={this.handleOnAuth} />
+                ) : (
+                  <Main user={user} onLogout={this.handleLogout} />
                 )
               }
             />
@@ -55,7 +69,7 @@ class App extends Component {
               path="/profile"
               render={() => (
                 <Profile
-                  picture={user.photoUrl}
+                  picture={user.photoURL}
                   displayName={user.displayName}
                   username={user.email.split("@")[0]}
                   emailAddress={user.email}
